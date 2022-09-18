@@ -1,10 +1,7 @@
-import { Box, Button, Input, TextField, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { Formik, Form, Field } from "formik";
 
-const LoginForm = () => {
-  const onSubmitHandler = (values) => {
-    console.log(values);
-  };
+const SignUpForm = ({ onSubmitHandler }) => {
   return (
     <Box
       style={{
@@ -19,8 +16,7 @@ const LoginForm = () => {
         style={{
           marginTop: "10%",
           marginBottom: "10%",
-
-          fontSize: "4vh",
+          fontSize: "2.5em",
           fontWeight: "bold",
           color: "#CBB0ED",
         }}
@@ -38,9 +34,9 @@ const LoginForm = () => {
           justifyContent: "space-between",
         }}
       >
-        <img src="./google_icon.png" />
-        <img src="./facebook_icon.png" />
-        <img src="./twitter_icon.png" />
+        <img src="./google_icon.png" alt="" />
+        <img src="./facebook_icon.png" alt="" />
+        <img src="./twitter_icon.png" alt="" />
       </Box>
       <Formik
         initialValues={{ email: "", roll_number: "", password: "" }}
@@ -50,12 +46,16 @@ const LoginForm = () => {
           <Field
             style={{
               height: "30%",
-              width: "70%",
+              width: "68%",
               fontSize: "20px",
               borderRadius: "10px",
-              backgroundColor: "#CBB0ED",
+              backgroundColor: "#E6DAF5",
+              border: 0,
+              paddingLeft: "15px",
+              paddingRight: "15px",
               marginBottom: "5%",
             }}
+            placeholder="Roll Number"
             name="roll_number"
             id="outlined-basic"
             label="Roll Number"
@@ -63,12 +63,17 @@ const LoginForm = () => {
           />
           <Field
             style={{
-              width: "70%",
+              width: "68%",
               height: "30%",
               borderRadius: "10px",
-              backgroundColor: "#CBB0ED",
+              fontSize: "20px",
+              border: 0,
+              paddingLeft: "15px",
+              paddingRight: "15px",
+              backgroundColor: "#E6DAF5",
               marginBottom: "5%",
             }}
+            placeholder="Email"
             name="email"
             id="outlined-basic"
             label="Email"
@@ -76,12 +81,17 @@ const LoginForm = () => {
           />
           <Field
             style={{
-              width: "70%",
+              width: "68%",
               height: "30%",
               borderRadius: "10px",
-              backgroundColor: "#CBB0ED",
+              fontSize: "20px",
+              border: 0,
+              paddingLeft: "15px",
+              paddingRight: "15px",
+              backgroundColor: "#E6DAF5",
               marginBottom: "5%",
             }}
+            placeholder="Password"
             name="password"
             type="password"
             id="outlined-basic"
@@ -91,7 +101,11 @@ const LoginForm = () => {
           <Button
             type="submit"
             variant="contained"
-            style={{ width: "40%", height: "20%" }}
+            style={{
+              width: "40%",
+              height: "25%",
+              backgroundColor: "#8D3EF0",
+            }}
           >
             Sign Up
           </Button>
@@ -101,4 +115,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignUpForm;
