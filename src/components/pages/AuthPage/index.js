@@ -9,10 +9,18 @@ import { useState } from "react";
 const AuthPage = () => {
   const [authToggleState, setAuthToggleState] = useState(false);
 
+  const [working, setWorking] = useState(false);
   const navigate = useNavigate();
-  const onSubmitHandler = async (values) => {
-    await axiosInstance.post("/users", values);
+  const signUpHandler = async (values) => {
+    setWorking(true);
+    await axiosInstance.post("/users/signup", values);
     navigate("/dashboard");
+  };
+
+  const signInHandler = async (values) => {
+    setWorking(true);
+    const { data } = await axiosInstance.post("/users/signin", values);
+    if (data) navigate("/dashboard");
   };
 
   const authToggleHandler = () => {
@@ -62,9 +70,9 @@ const AuthPage = () => {
             }}
           >
             {authToggleState ? (
-              <SignUpForm onSubmitHandler={onSubmitHandler} />
+              <SignUpForm working={working} onSubmitHandler={signUpHandler} />
             ) : (
-              <SignInForm />
+              <SignInForm working={working} onSubmitHandler={signInHandler} />
             )}
           </Box>
         </Box>

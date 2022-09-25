@@ -1,7 +1,7 @@
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
-import { Paper } from "@mui/material";
+import { CircularProgress, LinearProgress, Paper } from "@mui/material";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -16,6 +16,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import { useParams } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -57,7 +58,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function EmailVerification() {
+  const { token } = useParams();
+  console.log(token);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -255,8 +258,10 @@ export default function PrimarySearchAppBar() {
           elevation={6}
         >
           <Typography fontSize="40px" color="gray">
-            Welcome to Virtual Classroom
+            Please wait while your email is being verified
           </Typography>
+
+          <CircularProgress />
         </Paper>
       </Box>
     </Box>

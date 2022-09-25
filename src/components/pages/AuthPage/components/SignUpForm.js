@@ -1,7 +1,7 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, LinearProgress } from "@mui/material";
 import { Formik, Form, Field } from "formik";
 
-const SignUpForm = ({ onSubmitHandler }) => {
+const SignUpForm = ({ onSubmitHandler, working }) => {
   return (
     <Box
       style={{
@@ -12,6 +12,11 @@ const SignUpForm = ({ onSubmitHandler }) => {
         alignItems: "center",
       }}
     >
+      {working ? (
+        <Box sx={{ width: "100%" }}>
+          <LinearProgress color="secondary" />
+        </Box>
+      ) : null}
       <Typography
         style={{
           marginTop: "10%",
