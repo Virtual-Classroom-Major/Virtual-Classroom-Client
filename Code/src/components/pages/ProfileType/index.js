@@ -1,43 +1,7 @@
 import React from "react";
 import { Box } from "@mui/system";
 import { Typography, Button } from "@mui/material";
-import axiosInstance from "../../../services/axiosInstance";
-import { useRecoilState } from "recoil";
-import { authState } from "../../../atom";
-import { FACULTY, STUDENT } from "../../../constants/UserTypes";
-import { useNavigate } from "react-router-dom";
 export default function ProfileType() {
-  const navigate = useNavigate();
-  const [user_data, set_user_data] = useRecoilState(authState);
-
-  const studentProfileHandler = async () => {
-    console.log(user_data.id);
-    const { data } = await axiosInstance.post(
-      `users/update-profile-type/${user_data.id}`,
-      {
-        user_type: STUDENT,
-      }
-    );
-
-    set_user_data(data.data);
-
-    if (data.success) {
-      navigate("/dashboard/profile_details");
-    }
-  };
-  const facultyProfileHandler = async () => {
-    const { data } = await axiosInstance.post(
-      `users/update-profile-type/${user_data.id}`,
-      {
-        user_type: FACULTY,
-      }
-    );
-    set_user_data(data.data);
-
-    if (data.success) {
-      navigate("/dashboard/profile_details");
-    }
-  };
   return (
     <Box
       style={{
@@ -117,7 +81,6 @@ export default function ProfileType() {
               color: "white",
               borderRadius: "10px",
             }}
-            onClick={studentProfileHandler}
           >
             I'm a Student
           </Button>
@@ -132,7 +95,6 @@ export default function ProfileType() {
               borderRadius: "10px",
               height: "5vh",
             }}
-            onClick={facultyProfileHandler}
           >
             I'm an Educator
           </Button>

@@ -5,19 +5,12 @@ import axiosInstance from "../../../services/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import AuthToggle from "./components/AuthToggle";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { alertState, authState } from "../../../atom";
 
 const AuthPage = () => {
   const [authToggleState, setAuthToggleState] = useState(false);
 
-  const [alert_State, setAlert_State] = useRecoilState(alertState);
-  const [auth_State, setAuth_State] = useRecoilState(authState);
-
   const [working, setWorking] = useState(false);
   const navigate = useNavigate();
-
-  console.log("alert_State", alert_State);
   const signUpHandler = async (values) => {
     setWorking(true);
     await axiosInstance.post("/users/signup", values);
@@ -27,27 +20,7 @@ const AuthPage = () => {
   const signInHandler = async (values) => {
     setWorking(true);
     const { data } = await axiosInstance.post("/users/signin", values);
-    console.log(data);
-    if (data.success) {
-      setAuth_State(data.data);
-      if (!data.data.user_type) navigate("/profile_type");
-      else navigate("/dashboard/profile_details");
-    } else {
-      setAlert_State({
-        type: "Error",
-        message: "Invalid Credentials",
-      });
-
-      setTimeout(() => {
-        setAlert_State(
-          {
-            type: null,
-            message: null,
-          },
-          6000
-        );
-      });
-    }
+    if (data) navigate("/dashboard");
   };
 
   const authToggleHandler = () => {

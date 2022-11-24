@@ -1,17 +1,12 @@
 import { Box, Button, InputLabel, Grid, Typography } from "@mui/material";
 import { Formik, Form, Field } from "formik";
-import { useRecoilState } from "recoil";
 import { useState } from "react";
-import { authState } from "../../../atom";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import AddAPhotoOutlinedIcon from "@mui/icons-material/AddAPhotoOutlined";
 
 export default function ProfileDetails() {
-  const [user_data, set_user_data] = useRecoilState(authState);
-
-  console.log("user_data", user_data);
   const onSubmitHandler = (values) => {
     console.log(values);
   };
@@ -321,7 +316,6 @@ export default function ProfileDetails() {
                 </FormControl>
               </Box>
             </Box>
-            <Button variant="contained">Save</Button>
           </Form>
         </Formik>
       </Box>

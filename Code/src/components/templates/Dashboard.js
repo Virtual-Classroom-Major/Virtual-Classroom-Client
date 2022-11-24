@@ -9,8 +9,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import { useRecoilState } from "recoil";
-import { authState } from "../../atom";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -20,8 +18,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+
 import { Outlet } from "react-router-dom";
-import DashboardPanels from "../../DashboardPanels";
 
 const drawerWidth = 240;
 
@@ -91,8 +89,6 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function DashboardLayout() {
-  const [user_data, set_user_data] = useRecoilState(authState);
-
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -142,36 +138,28 @@ export default function DashboardLayout() {
         </DrawerHeader>
         <Divider />
         <List>
-          {user_data &&
-            DashboardPanels[user_data?.user_type].map((panel, index) => (
-              <ListItem
-                key={panel.title}
-                disablePadding
-                sx={{ display: "block" }}
+          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+            <ListItem key={text} disablePadding sx={{ display: "block" }}>
+              <ListItemButton
+                sx={{
+                  minHeight: 80,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
               >
-                <ListItemButton
+                <ListItemIcon
                   sx={{
-                    minHeight: 80,
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
                   }}
                 >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {panel.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={panel.title}
-                    sx={{ opacity: open ? 1 : 0 }}
-                  />
-                </ListItemButton>
-              </ListItem>
-            ))}
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
         <Divider />
         <List>
