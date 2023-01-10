@@ -8,7 +8,7 @@ const panels = {
     {
       icon: <AccountCircleIcon />,
       title: "Profile",
-      href: "/dashboard/profile_details_faculty",
+      href: "",
     },
     {
       icon: <SchoolIcon />,
@@ -20,17 +20,12 @@ const panels = {
       title: "Assignments",
       href: "",
     },
-    {
-      icon: <AssignmentIcon />,
-      title: "Classes",
-      href: "/dashboard/classes",
-    },
   ],
   STUDENT: [
     {
       icon: <AccountCircleIcon />,
       title: "Profile",
-      href: "/dashboard/profile_details_student",
+      href: "",
     },
     {
       icon: <MenuBookIcon />,
@@ -41,11 +36,6 @@ const panels = {
       icon: <AssignmentIcon />,
       title: "Assignments",
       href: "",
-    },
-    {
-      icon: <AssignmentIcon />,
-      title: "Classes",
-      href: "/dashboard/classes",
     },
   ],
 };

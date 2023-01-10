@@ -22,13 +22,14 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { Outlet } from "react-router-dom";
 import DashboardPanels from "../../DashboardPanels";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
-    easing: theme.transitions.easing.sharp,
+    easing: theme.transitions.easing.seaseInOut,
     duration: theme.transitions.duration.enteringScreen,
   }),
   overflowX: "hidden",
@@ -92,6 +93,7 @@ const Drawer = styled(MuiDrawer, {
 
 export default function DashboardLayout() {
   const [user_data, set_user_data] = useRecoilState(authState);
+  const navigate = useNavigate();
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -144,33 +146,35 @@ export default function DashboardLayout() {
         <List>
           {user_data &&
             DashboardPanels[user_data?.user_type].map((panel, index) => (
-              <ListItem
-                key={panel.title}
-                disablePadding
-                sx={{ display: "block" }}
-              >
-                <ListItemButton
-                  sx={{
-                    minHeight: 80,
-                    justifyContent: open ? "initial" : "center",
-                    px: 2.5,
-                  }}
+              <Box onClick={() => navigate(panel.href)}>
+                <ListItem
+                  key={panel.title}
+                  disablePadding
+                  sx={{ display: "block" }}
                 >
-                  <ListItemIcon
+                  <ListItemButton
                     sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
+                      minHeight: 80,
+                      justifyContent: open ? "initial" : "center",
+                      px: 2.5,
                     }}
                   >
-                    {panel.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={panel.title}
-                    sx={{ opacity: open ? 1 : 0 }}
-                  />
-                </ListItemButton>
-              </ListItem>
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {panel.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={panel.title}
+                      sx={{ opacity: open ? 1 : 0 }}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              </Box>
             ))}
         </List>
         <Divider />

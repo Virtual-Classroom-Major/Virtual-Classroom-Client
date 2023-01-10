@@ -7,6 +7,7 @@ import AuthToggle from "./components/AuthToggle";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { alertState, authState } from "../../../atom";
+import { STUDENT, FACULTY } from "../../../constants/UserTypes";
 
 const AuthPage = () => {
   const [authToggleState, setAuthToggleState] = useState(false);
@@ -21,7 +22,8 @@ const AuthPage = () => {
   const signUpHandler = async (values) => {
     setWorking(true);
     await axiosInstance.post("/users/signup", values);
-    navigate("/dashboard");
+    navigate("/email_not_verified");
+    setWorking(false);
   };
 
   const signInHandler = async (values) => {
@@ -29,9 +31,15 @@ const AuthPage = () => {
     const { data } = await axiosInstance.post("/users/signin", values);
     console.log(data);
     if (data.success) {
+      localStorage.setItem("user_id", data.data.id);
       setAuth_State(data.data);
       if (!data.data.user_type) navigate("/profile_type");
-      else navigate("/dashboard/profile_details");
+      else {
+        if (data.data.user_type === STUDENT)
+          navigate("/dashboard/profile_details_student");
+        else if (data.data.user_type === FACULTY)
+          navigate("/dashboard/profile_details_faculty");
+      }
     } else {
       setAlert_State({
         type: "Error",
@@ -48,6 +56,7 @@ const AuthPage = () => {
         );
       });
     }
+    setWorking(false);
   };
 
   const authToggleHandler = () => {

@@ -22,7 +22,7 @@ export default function ProfileType() {
     set_user_data(data.data);
 
     if (data.success) {
-      navigate("/dashboard/profile_details");
+      navigate("/dashboard/profile_details_student");
     }
   };
   const facultyProfileHandler = async () => {
@@ -35,7 +35,7 @@ export default function ProfileType() {
     set_user_data(data.data);
 
     if (data.success) {
-      navigate("/dashboard/profile_details");
+      navigate("/dashboard/profile_details_faculty");
     }
   };
   return (

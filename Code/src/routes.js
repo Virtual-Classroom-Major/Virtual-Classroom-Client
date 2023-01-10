@@ -4,7 +4,8 @@ import { Outlet } from "react-router-dom";
 import EmailVerification from "./components/pages/EmailVerification";
 import EmailNotVerified from "./components/pages/EmailNotVerified";
 import DashboardLayout from "./components/templates/Dashboard";
-import ProfileDetails from "./components/pages/ProfileDetails";
+import ProfileDetailsS from "./components/pages/ProfileDetailsS";
+import ProfileDetailsF from "./components/pages/ProfileDetailsF";
 import ProfileType from "./components/pages/ProfileType";
 
 const routes = () => [
@@ -15,7 +16,10 @@ const routes = () => [
   {
     path: "dashboard",
     element: <DashboardLayout />,
-    children: [{ path: "profile_details", element: <ProfileDetails /> }],
+    children: [
+      { path: "profile_details_student", element: <ProfileDetailsS /> },
+      { path: "profile_details_faculty", element: <ProfileDetailsF /> },
+    ],
   },
 
   // { path: "/", element: <LandingPage /> },
