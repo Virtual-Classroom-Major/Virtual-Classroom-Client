@@ -1,3 +1,11 @@
+# To use the project 
+Run the following command
+### `npm start`
+
+Once the app starts navigate to `http://localhost:3000/auth` route to begin
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
