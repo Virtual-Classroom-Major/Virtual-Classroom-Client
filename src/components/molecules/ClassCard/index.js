@@ -57,7 +57,7 @@ export default function ClassCard({ classData }) {
           fontWeight: "bold",
         }}
       >
-        {classData.subject_name}
+        {""}
       </Typography>
     </Paper>
   );

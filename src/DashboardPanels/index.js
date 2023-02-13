@@ -8,7 +8,7 @@ const panels = {
     {
       icon: <AccountCircleIcon />,
       title: "Profile",
-      href: "/dashboard/profile_details_faculty",
+      href: "/dashboard/profile_faculty",
     },
     {
       icon: <SchoolIcon />,
@@ -30,7 +30,7 @@ const panels = {
     {
       icon: <AccountCircleIcon />,
       title: "Profile",
-      href: "/dashboard/profile_details_student",
+      href: "/dashboard/profile_student",
     },
     {
       icon: <MenuBookIcon />,

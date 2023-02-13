@@ -146,7 +146,12 @@ export default function DashboardLayout() {
         <List>
           {user_data &&
             DashboardPanels[user_data?.user_type].map((panel, index) => (
-              <Box onClick={() => navigate(panel.href)}>
+              <Box
+                onClick={() => {
+                  console.log(panel.href);
+                  navigate(panel.href);
+                }}
+              >
                 <ListItem
                   key={panel.title}
                   disablePadding

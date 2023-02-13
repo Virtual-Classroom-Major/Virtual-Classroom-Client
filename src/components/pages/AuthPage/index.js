@@ -32,6 +32,7 @@ const AuthPage = () => {
     console.log(data);
     if (data.success) {
       localStorage.setItem("user_id", data.data.id);
+      localStorage.setItem("user_type", data.data.user_type);
       setAuth_State(data.data);
       if (!data.data.user_type) navigate("/profile_type");
       else {
