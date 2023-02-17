@@ -5,7 +5,7 @@ import Select from "@mui/material/Select";
 import { Formik, Form, Field } from "formik";
 import { useRecoilState } from "recoil";
 import hexRgb from "hex-rgb";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { authState } from "../../../atom";
 import axiosInstance from "../../../services/axiosInstance";
 
@@ -13,8 +13,18 @@ export default function NewClassModal({ showModal, setShowModal }) {
   const [batch, setBatch] = useState(2022);
   const [subject, setSubject] = useState("Maths");
   const [section, setSection] = useState("A");
+  const [subjectList, setSubjectList] = useState([]);
   const [branch, setBranch] = useState("COMPUTER SCIENCE AND ENGINEERING");
   const [user_data, set_user_data] = useRecoilState(authState);
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await axiosInstance.get("subject/all-subject");
+      if (data.success) {
+        setSubjectList(data.data);
+      }
+      console.log(data);
+    }
+  }, []);
   const onSubmitHandler = async (values) => {
     values.target_batch = batch;
     values.target_section = section;
