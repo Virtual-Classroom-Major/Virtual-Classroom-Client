@@ -18,24 +18,26 @@ export default function NewClassModal({ showModal, setShowModal }) {
   const [user_data, set_user_data] = useRecoilState(authState);
   useEffect(() => {
     async function fetchData() {
-      const { data } = await axiosInstance.get("subject/all-subject");
+      const { data } = await axiosInstance.get("subject/all-subjects");
       if (data.success) {
         setSubjectList(data.data);
       }
       console.log(data);
     }
-  }, []);
+    fetchData();
+  }, [showModal]);
   const onSubmitHandler = async (values) => {
     values.target_batch = batch;
     values.target_section = section;
     values.faculty_id = user_data.id;
-    values.subject_id = "someid";
+    values.subject_id = subject;
     values.color = hexRgb(values.color, { format: "array" });
 
     console.log("values", values);
     const { data } = await axiosInstance.post(`/class`, values);
     console.log("postdata", data);
   };
+
   const batchChangeHandler = (event) => {
     console.log(event);
     setBatch(event.target.value);
@@ -197,13 +199,13 @@ export default function NewClassModal({ showModal, setShowModal }) {
                       style={{ width: "20vw", backgroundColor: "#E6DAF5" }}
                       onChange={subjectChangeHandler}
                     >
-                      <MenuItem value={"Maths"}>Maths</MenuItem>
-                      <MenuItem value={"Physics"}>Physics</MenuItem>
-                      <MenuItem value={"Chemistry"}>Chemistry</MenuItem>
+                      {subjectList.map((sub) => {
+                        console.log(sub.name);
+                        return <MenuItem value={sub.id}>{sub.name}</MenuItem>;
+                      })}
                     </Select>
                   </FormControl>
                 </Box>
-
                 <Box
                   style={{
                     width: "90%",
