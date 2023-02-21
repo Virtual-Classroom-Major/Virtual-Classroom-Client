@@ -25,7 +25,7 @@ export default function ClassCard({ classData }) {
       <Typography
         style={{
           color: "rgba(250,250,250,0.4)",
-          fontSize: "4vh",
+          fontSize: "3.6vh",
           fontWeight: "bold",
         }}
       >
@@ -36,6 +36,7 @@ export default function ClassCard({ classData }) {
           color: "white",
           fontSize: "2vh",
           fontWeight: "bold",
+          marginTop: "auto",
         }}
       >
         {classData.target_batch} | SEC {classData.target_section}
@@ -51,13 +52,12 @@ export default function ClassCard({ classData }) {
       </Typography>
       <Typography
         style={{
-          marginTop: "auto",
           color: "rgba(200,200,200,1)",
           fontSize: "2.5vh",
           fontWeight: "bold",
         }}
       >
-        {""}
+        {classData.subject.name}
       </Typography>
     </Paper>
   );

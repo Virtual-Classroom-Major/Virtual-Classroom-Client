@@ -2,7 +2,7 @@ import SchoolIcon from "@mui/icons-material/School";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 const panels = {
   FACULTY: [
     {
@@ -25,6 +25,11 @@ const panels = {
       title: "Classes",
       href: "/dashboard/classes",
     },
+    {
+      icon: <PowerSettingsNewIcon />,
+      title: "Logout",
+      href: "/logout",
+    },
   ],
   STUDENT: [
     {
@@ -46,6 +51,11 @@ const panels = {
       icon: <AssignmentIcon />,
       title: "Classes",
       href: "/dashboard/classes",
+    },
+    {
+      icon: <PowerSettingsNewIcon />,
+      title: "Logout",
+      href: "/logout",
     },
   ],
 };

@@ -73,8 +73,8 @@ export default function ProfileDetails() {
             }}
           >
             <img
-              style={{}}
-              src="https://api.lorem.space/image/face?w=600&h=300"
+              style={{ marginTop: "7%", height: "40%", borderRadius: "100%" }}
+              src={userData.profile_img}
             />
             <Box
               style={{
@@ -315,7 +315,10 @@ export default function ProfileDetails() {
                     marginRight: "3vw",
                   }}
                 />
-                <Typography variant="h5" style={{ color: "#555555" }}>
+                <Typography
+                  variant="h5"
+                  style={{ textAlign: "left", color: "#555555" }}
+                >
                   {userData.location}
                 </Typography>
               </Box>

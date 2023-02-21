@@ -1,31 +1,66 @@
 import { Box, Button, InputLabel, Grid, Typography } from "@mui/material";
 import { Formik, Form, Field } from "formik";
 import { useRecoilState } from "recoil";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { authState } from "../../../atom";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import ImageUpload from "../../molecules/ImageUpload";
 import AddAPhotoOutlinedIcon from "@mui/icons-material/AddAPhotoOutlined";
 import axiosInstance from "../../../services/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileDetails() {
+  const navigate = useNavigate();
   const [batch, setBatch] = useState(2022);
   const [branch, setBranch] = useState("COMPUTER SCIENCE AND ENGINEERING");
   const [user_data, set_user_data] = useRecoilState(authState);
+  const [uploaded_img_url, set_uploaded_img_url] = useState("");
+
+  const [first_name, set_first_name] = useState("");
+  const [last_name, set_last_name] = useState("");
+  const [employee_id, set_employee_id] = useState("");
+  const [department, set_department] = useState("");
+  const [experience, set_experience] = useState("");
+  const [date_of_joining, set_date_of_joining] = useState("");
+  const [spouse_name, set_spouse_name] = useState("");
+  const [location, set_location] = useState("");
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = axiosInstance.get(`/users/${user_data.id}`);
+      set_first_name(data.data.first_name);
+      set_last_name(data.data.last_name);
+      set_employee_id(data.data.employee_id);
+      set_department(data.data.department);
+      set_experience(data.data.experience);
+      set_date_of_joining(data.data.date_of_joining);
+      set_spouse_name(data.data.spouse_name);
+      set_location(data.data.location);
+    }
+    fetchData();
+  }, []);
 
   console.log("user_data", user_data);
+
   const onSubmitHandler = async (values) => {
     values.department = branch;
     values.user_type = user_data.user_type;
-
+    values.profile_img = uploaded_img_url;
     console.log(values);
     const { data } = await axiosInstance.post(
       `/users/update-profile-details/${user_data.id}`,
       values
     );
+    if (data.success) {
+      navigate("/dashboard/profile_faculty");
+    }
   };
 
+  const imageUploadSuccess = (result) => {
+    set_uploaded_img_url(result.url);
+  };
   const batchChangeHandler = (event) => {
     console.log(event);
     setBatch(event.target.value);
@@ -64,6 +99,7 @@ export default function ProfileDetails() {
             marginBottom: "2vh",
             height: "20vh",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             borderRadius: "100%",
@@ -73,6 +109,7 @@ export default function ProfileDetails() {
           <AddAPhotoOutlinedIcon
             style={{ color: "#CBB0ED", fontSize: "10vh" }}
           />
+          <ImageUpload onSuccess={imageUploadSuccess} />
         </Box>
         <Typography
           variant="p"
@@ -86,14 +123,14 @@ export default function ProfileDetails() {
         </Typography>
         <Formik
           initialValues={{
-            first_name: "",
-            last_name: "",
-            employee_id: "",
-            department: "",
-            experience: "",
-            date_of_joining: "",
-            spouse_name: "",
-            location: "",
+            first_name: first_name,
+            last_name: last_name,
+            employee_id: employee_id,
+            department: department,
+            experience: experience,
+            date_of_joining: date_of_joining,
+            spouse_name: spouse_name,
+            location: location,
           }}
           onSubmit={onSubmitHandler}
         >
@@ -143,6 +180,7 @@ export default function ProfileDetails() {
                   name="first_name"
                   id="outlined-basic"
                   variant="outlined"
+                  value={first_name}
                 />
               </Box>
 
