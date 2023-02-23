@@ -29,7 +29,7 @@ export default function ProfileDetails() {
 
   useEffect(() => {
     async function fetchData() {
-      const { data } = axiosInstance.get(`/users/${user_data.id}`);
+      const { data } = await axiosInstance.get(`/users/${user_data.id}`);
       set_first_name(data.data.first_name);
       set_last_name(data.data.last_name);
       set_employee_id(data.data.employee_id);
@@ -123,14 +123,14 @@ export default function ProfileDetails() {
         </Typography>
         <Formik
           initialValues={{
-            first_name: first_name,
-            last_name: last_name,
-            employee_id: employee_id,
-            department: department,
-            experience: experience,
-            date_of_joining: date_of_joining,
-            spouse_name: spouse_name,
-            location: location,
+            first_name: "",
+            last_name: "",
+            employee_id: "",
+            department: "",
+            experience: "",
+            date_of_joining: "",
+            spouse_name: "",
+            location: "",
           }}
           onSubmit={onSubmitHandler}
         >
@@ -180,7 +180,6 @@ export default function ProfileDetails() {
                   name="first_name"
                   id="outlined-basic"
                   variant="outlined"
-                  value={first_name}
                 />
               </Box>
 
