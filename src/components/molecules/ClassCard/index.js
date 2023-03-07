@@ -1,7 +1,13 @@
-import { Paper, Typography } from "@mui/material";
+import { Paper, Typography , Button } from "@mui/material";
+import { useState } from "react";
 
 export default function ClassCard({ classData }) {
   console.log(classData.start_time);
+  const [attended, setAttended] = useState(false);
+
+  const handleAttendance = () => {
+    setAttended(true);
+  };
   return (
     <Paper
       elevation={6}
@@ -59,6 +65,29 @@ export default function ClassCard({ classData }) {
       >
         {classData.subject.name}
       </Typography>
+      {!attended && (
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ marginTop: "2vh" }}
+          onClick={handleAttendance}
+        >
+          Mark Attendance
+        </Button>
+      )}
+      {attended && (
+        <Typography
+          style={{
+            color: "green",
+            fontSize: "2.5vh",
+            fontWeight: "bold",
+            marginTop: "2vh",
+          }}
+        >
+          Attended
+        </Typography>
+      )}
+      
     </Paper>
   );
 }

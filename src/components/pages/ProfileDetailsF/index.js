@@ -104,13 +104,27 @@ export default function ProfileDetails() {
             justifyContent: "center",
             borderRadius: "100%",
             backgroundColor: "#A98AD0",
+            overflow:"hidden",
           }}
         >
-          <AddAPhotoOutlinedIcon
-            style={{ color: "#CBB0ED", fontSize: "10vh" }}
+          { uploaded_img_url ?(
+            <div id="my-icon">
+
+            <img src={uploaded_img_url} alt="uploaded img" style={{height:"20vh",width: "20vh"}}/>
+            </div>
+          ) : ( <AddAPhotoOutlinedIcon
+            style={{ color: "#CBB0ED", fontSize: "8vh",alignItems:"center" }}
           />
-          <ImageUpload onSuccess={imageUploadSuccess} />
+          )
+}
+          
+          
+          {/* <AddAPhotoOutlinedIcon
+            style={{ color: "#CBB0ED", fontSize: "8vh",alignItems:"center" }}
+          /> */}
+          
         </Box>
+        <ImageUpload onSuccess={imageUploadSuccess} />
         <Typography
           variant="p"
           style={{

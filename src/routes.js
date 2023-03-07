@@ -11,12 +11,14 @@ import ProfileF from "./components/pages/ProfileF";
 import ProfileType from "./components/pages/ProfileType";
 import ViewClasses from "./components/pages/ViewClasses";
 import Logout from "./components/atoms/Logout";
+import Playground from "./components/pages/Playground";
 const routes = () => [
   { path: "auth", element: <AuthPage /> },
   { path: "email_not_verified", element: <EmailNotVerified /> },
   { path: "verify_email/:token", element: <EmailVerification /> },
   { path: "profile_type", element: <ProfileType /> },
   { path: "logout", element: <Logout /> },
+  { path: "playground", element: <Playground /> },
   {
     path: "dashboard",
     element: <DashboardLayout />,
