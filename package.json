@@ -16,6 +16,7 @@
     "imagekitio-react": "^2.0.0",
     "lottie-react": "^2.3.1",
     "moment": "^2.29.4",
+    "peerjs": "^1.4.7",
     "random-string-generator": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -44,8 +45,8 @@
       "not op_mini all"
     ],
     "development": [
-      "last 1 chrome version",
       "last 1 firefox version",
+      "last 1 chrome version",
       "last 1 safari version"
     ]
   }

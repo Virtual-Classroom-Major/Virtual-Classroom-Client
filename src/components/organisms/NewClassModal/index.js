@@ -8,8 +8,10 @@ import hexRgb from "hex-rgb";
 import { useEffect, useState } from "react";
 import { authState } from "../../../atom";
 import axiosInstance from "../../../services/axiosInstance";
+import { useNavigate } from "react-router-dom";
 
 export default function NewClassModal({ showModal, setShowModal }) {
+  const navigate = useNavigate();
   const [batch, setBatch] = useState(2022);
   const [subject, setSubject] = useState("Maths");
   const [section, setSection] = useState("A");
@@ -36,6 +38,7 @@ export default function NewClassModal({ showModal, setShowModal }) {
     console.log("values", values);
     const { data } = await axiosInstance.post(`/class`, values);
     console.log("postdata", data);
+    navigate(0);
   };
 
   const batchChangeHandler = (event) => {
