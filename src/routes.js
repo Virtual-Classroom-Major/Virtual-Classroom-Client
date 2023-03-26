@@ -25,9 +25,11 @@ const routes = () => [
   { path: "profile_type", element: <ProfileType /> },
   { path: "logout", element: <Logout /> },
   { path: "playground", element: <Playground /> },
+  
   { path: "playground-dev", element: <PlaygroundV2 /> },
-  { path: "video-call/:id", element: <VideoCall /> },
-  { path: "video-class/:id", element: <VideoClass /> },
+  { path: "video-call/:id", element: <VideoCall /> },//for students
+  { path: "video-class/:id", element: <VideoClass /> },//for faculty
+
   {
     path: "dashboard",
     element: <DashboardLayout />,

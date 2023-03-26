@@ -75,7 +75,7 @@ export default function VideoClass() {
         currentUserVideoRef.current.play();
 
         var call = peerInstance.current.call(contactId, stream);
-        console.log("receiving call");
+
         call.on("stream", function (remoteStream) {
           console.log("remoteStream", remoteStream);
           remoteVideoRef.current.srcObject = remoteStream;
@@ -196,6 +196,7 @@ export default function VideoClass() {
         }}
       >
         <video style={{ width: "10vh", height: "10vh" }} ref={remoteVideoRef} />
+
       </Box>
     </Box>
   );

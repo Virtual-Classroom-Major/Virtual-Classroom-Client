@@ -2,7 +2,9 @@ import { Paper, Typography, Button, Box } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../../services/axiosInstance";
+
 export default function ClassCard({ classData, attendanceHandler }) {
+
   console.log(classData.start_time);
   const [attended, setAttended] = useState(false);
 
@@ -19,7 +21,9 @@ export default function ClassCard({ classData, attendanceHandler }) {
     navigate(0);
   };
   const viweAttendance = async () => {
-    attendanceHandler(classData.id);
+
+  attendanceHandler(classData.id);
+
   };
   return (
     <Paper
