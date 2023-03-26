@@ -12,13 +12,22 @@ import ProfileType from "./components/pages/ProfileType";
 import ViewClasses from "./components/pages/ViewClasses";
 import Logout from "./components/atoms/Logout";
 import Playground from "./components/pages/Playground";
+import PlaygroundV2 from "./components/pages/PlaygroundV2";
+import VideoCall from "./components/pages/VideoCall";
+import VideoClass from "./components/pages/VideoClass";
+import Landing from "./components/pages/Landing";
+
 const routes = () => [
+  { path: "", element: <Landing /> },
   { path: "auth", element: <AuthPage /> },
   { path: "email_not_verified", element: <EmailNotVerified /> },
   { path: "verify_email/:token", element: <EmailVerification /> },
   { path: "profile_type", element: <ProfileType /> },
   { path: "logout", element: <Logout /> },
   { path: "playground", element: <Playground /> },
+  { path: "playground-dev", element: <PlaygroundV2 /> },
+  { path: "video-call/:id", element: <VideoCall /> },
+  { path: "video-class/:id", element: <VideoClass /> },
   {
     path: "dashboard",
     element: <DashboardLayout />,

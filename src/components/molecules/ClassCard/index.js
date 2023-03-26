@@ -1,12 +1,25 @@
-import { Paper, Typography , Button } from "@mui/material";
+import { Paper, Typography, Button, Box } from "@mui/material";
 import { useState } from "react";
-
-export default function ClassCard({ classData }) {
+import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../../services/axiosInstance";
+export default function ClassCard({ classData, attendanceHandler }) {
   console.log(classData.start_time);
   const [attended, setAttended] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleAttendance = () => {
     setAttended(true);
+  };
+  const joinClass = () => {
+    navigate(`/video-class/${classData.id}`);
+  };
+  const deleteClass = async () => {
+    await axiosInstance.delete(`/class/${classData.id}`);
+    navigate(0);
+  };
+  const viweAttendance = async () => {
+    attendanceHandler(classData.id);
   };
   return (
     <Paper
@@ -35,7 +48,7 @@ export default function ClassCard({ classData }) {
           fontWeight: "bold",
         }}
       >
-        {classData.title}
+        {classData.title.slice(0, 23)}...
       </Typography>
       <Typography
         style={{
@@ -65,7 +78,7 @@ export default function ClassCard({ classData }) {
       >
         {classData.subject.name}
       </Typography>
-      {!attended && (
+      {/* {!attended && (
         <Button
           variant="contained"
           color="primary"
@@ -86,8 +99,49 @@ export default function ClassCard({ classData }) {
         >
           Attended
         </Typography>
-      )}
-      
+      )} */}
+      <Box
+        style={{
+          width: "18vw",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <Button
+          style={{
+            width: "2vw",
+            backgroundColor: `rgba(255,255,255,0.9)`,
+            fontWeight: "bold",
+            color: "green",
+          }}
+          onClick={joinClass}
+        >
+          Join
+        </Button>
+        <Button
+          style={{
+            width: "6vw",
+            backgroundColor: `rgba(255,255,255,0.9)`,
+            fontWeight: "bold",
+            color: "orange",
+          }}
+          onClick={viweAttendance}
+        >
+          Attendance
+        </Button>
+        <Button
+          style={{
+            width: "6vw",
+            backgroundColor: `rgba(255,255,255,0.9)`,
+            fontWeight: "bold",
+            color: "red",
+          }}
+          onClick={deleteClass}
+        >
+          Delete
+        </Button>
+      </Box>
     </Paper>
   );
 }
