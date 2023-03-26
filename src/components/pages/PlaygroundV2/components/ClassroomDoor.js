@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"; // import Link component from React Router
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+
 export default function ClassroomDoor() {
   const [doorOpen, setDoorOpen] = useState("classroom_door.png");
 
   return (
+
     <div style={{ position: "relative" }}>
       <img
         src={doorOpen}
@@ -37,5 +39,6 @@ export default function ClassroomDoor() {
         </Link>
       )}
     </div>
+    
   );
 }

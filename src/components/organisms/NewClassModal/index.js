@@ -65,6 +65,12 @@ export default function NewClassModal({ showModal, setShowModal }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            position: "absolute",
+            zIndex: 8,
+            top: 0,
+            left: 0,
+            alignItems: "center",
+            backgroundColor: "rgba(10,10,10,0.7)",
           }}
         >
           <Box

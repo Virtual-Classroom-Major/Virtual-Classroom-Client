@@ -4,7 +4,9 @@ import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
+
 import Jamboard from './components/jamboard';
+
 
 const PEER_ID = "833e645f-e7b8-4189-8e1f-5394412b4c55";
 export default function VideoCall() {
@@ -16,6 +18,7 @@ export default function VideoCall() {
   const remoteVideoRef = useRef(null);
   const peerInstance = useRef(null);
   const { id } = useParams();
+
 
   const App = () => {
     const [showJamboard, setShowJamboard] = useState(false);
@@ -90,9 +93,11 @@ export default function VideoCall() {
       style={{
         width: "100vw",
         height: "100vh",
+
         backgroundColor: "#e4c198",
         backgroundImage: `url('${process.env.PUBLIC_URL}/classroom.png')`,
         backgroundSize: "100vw 100vh",
+
         backgroundRepeat: "no-repeat",
         display: "flex",
         flexDirection: "column",
@@ -100,6 +105,7 @@ export default function VideoCall() {
         alignItems: "center",
       }}
     >
+
       <Jamboard/>
       <video
         style={{
@@ -107,11 +113,13 @@ export default function VideoCall() {
           marginBottom: "auto",
           marginRight:"8vw",
           width: "30vw",
+
           borderRadius: "10px",
           boxShadow: "0 0 20px 2px gray",
         }}
         ref={remoteVideoRef}
       />
+
       <Box
         style={{
           width: "100vw",
@@ -122,6 +130,7 @@ export default function VideoCall() {
           backgroundColor: "rgba(0,0,0,0.5)",
         }}
       >
+
         <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
         <img
           src={`${process.env.PUBLIC_URL}/youtube.png`}
@@ -133,6 +142,7 @@ export default function VideoCall() {
           }}
         />
       </a>
+
         <video
           style={{ width: "15vh", height: "15vh", borderRadius: "10px" }}
           ref={currentUserVideoRef}
