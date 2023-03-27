@@ -29,14 +29,18 @@ const AuthPage = () => {
   const signInHandler = async (values) => {
     setWorking(true);
     const { data } = await axiosInstance.post("/users/signin", values);
-    console.log(data);
     if (data.success) {
+      if (data.data.email_verified === false) {
+        navigate("/email_not_verified");
+        return;
+      }
       localStorage.setItem("user_id", data.data.id);
       localStorage.setItem("user_type", data.data.user_type);
       setAuth_State(data.data);
       if (!data.data.user_type) navigate("/profile_type");
       else {
         if (data.data.user_type === STUDENT)
+          //if profile_updated true
           navigate("/dashboard/profile_details_student");
         else if (data.data.user_type === FACULTY)
           navigate("/dashboard/profile_details_faculty");

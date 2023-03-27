@@ -16,6 +16,7 @@ import PlaygroundV2 from "./components/pages/PlaygroundV2";
 import VideoCall from "./components/pages/VideoCall";
 import VideoClass from "./components/pages/VideoClass";
 import Landing from "./components/pages/Landing";
+import AttendanceBySubject from "./components/pages/AttendanceBySubject";
 
 const routes = () => [
   { path: "", element: <Landing /> },
@@ -25,10 +26,10 @@ const routes = () => [
   { path: "profile_type", element: <ProfileType /> },
   { path: "logout", element: <Logout /> },
   { path: "playground", element: <Playground /> },
-  
+
   { path: "playground-dev", element: <PlaygroundV2 /> },
-  { path: "video-call/:id", element: <VideoCall /> },//for students
-  { path: "video-class/:id", element: <VideoClass /> },//for faculty
+  { path: "video-call/:id", element: <VideoCall /> }, //for students
+  { path: "video-class/:id", element: <VideoClass /> }, //for faculty
 
   {
     path: "dashboard",
@@ -39,6 +40,7 @@ const routes = () => [
       { path: "profile_student", element: <ProfileS /> },
       { path: "profile_faculty", element: <ProfileF /> },
       { path: "classes", element: <ViewClasses /> },
+      { path: "attendance", element: <AttendanceBySubject /> },
     ],
   },
 

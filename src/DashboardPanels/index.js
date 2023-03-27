@@ -42,7 +42,7 @@ const panels = {
     {
       icon: <MenuBookIcon />,
       title: "Subjects",
-      href: "",
+      href: "/dashboard/attendance",
     },
     {
       icon: <AssignmentIcon />,

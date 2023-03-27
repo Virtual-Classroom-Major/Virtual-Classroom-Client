@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box } from "@mui/system";
 import { Typography, Button } from "@mui/material";
 import Lottie from "lottie-react";
 import emailLoader from "./email_loading.json";
+import axiosInstance from "../../../services/axiosInstance";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function EmailNotVerified() {
+  const { token } = useParams();
+  const navigate = useNavigate();
+  useEffect(() => {
+    async function verifyEmail() {
+      console.log("token", token);
+      const { data } = await axiosInstance.post(`users/verify_email/${token}`);
+      if (data.success) {
+        console.log("email verified successfully");
+        navigate("/auth");
+      }
+    }
+    verifyEmail();
+  }, []);
   return (
     <Box
       style={{
