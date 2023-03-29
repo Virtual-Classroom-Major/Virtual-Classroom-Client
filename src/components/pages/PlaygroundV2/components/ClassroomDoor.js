@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"; // import Link component from React Router
-import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 
-export default function ClassroomDoor() {
+export default function ClassroomDoor({ classId, classJoinHandler }) {
   const [doorOpen, setDoorOpen] = useState("classroom_door.png");
 
   return (
-
     <div style={{ position: "relative" }}>
       <img
         src={doorOpen}
@@ -24,21 +23,19 @@ export default function ClassroomDoor() {
         }
       />
       {doorOpen === "classroom_door_open.png" && (
-        <Link to="/classroom">
-          <button
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "73%",
-              transform: "translate(-50%, -50%)",
-            }}
-          >
-            <MeetingRoomIcon style={{color:"orange",fontSize:"4.5vw"}}/>
-            Join Class
-          </button>
-        </Link>
+        <button
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "73%",
+            transform: "translate(-50%, -50%)",
+          }}
+          onClick={() => classJoinHandler(classId)}
+        >
+          <MeetingRoomIcon style={{ color: "orange", fontSize: "4.5vw" }} />
+          Join Class
+        </button>
       )}
     </div>
-    
   );
 }

@@ -49,7 +49,7 @@ export default function VideoClass() {
         navigator.mozGetUserMedia;
 
       getUserMedia(
-        { video: true, audio: true },
+        { video: { mediaSource: "screen" }, audio: true },
         function (stream) {
           console.log("stream", stream);
           call.answer(stream);
@@ -69,7 +69,7 @@ export default function VideoClass() {
       navigator.mozGetUserMedia;
 
     getUserMedia(
-      { video: videoON, audio: true },
+      { video: { mediaSource: "screen" }, audio: true },
       function (stream) {
         currentUserVideoRef.current.srcObject = stream;
         currentUserVideoRef.current.play();
@@ -196,7 +196,6 @@ export default function VideoClass() {
         }}
       >
         <video style={{ width: "10vh", height: "10vh" }} ref={remoteVideoRef} />
-
       </Box>
     </Box>
   );

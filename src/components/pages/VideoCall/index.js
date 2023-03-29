@@ -2,31 +2,29 @@
 
 import Peer from "peerjs";
 import { useEffect, useRef, useState } from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import { useParams } from "react-router-dom";
-
-import Jamboard from './components/jamboard';
-
+import GestureSharpIcon from "@mui/icons-material/GestureSharp";
+import Jamboard from "./components/jamboard";
 
 const PEER_ID = "833e645f-e7b8-4189-8e1f-5394412b4c55";
 export default function VideoCall() {
   const [peerId, setPeerId] = useState("");
   const [callId, setCallId] = useState("");
   const [mediaStreamData, setMediaStreamData] = useState(null);
-
+  const [jamboardOpen, setJamboardOpen] = useState(false);
   const currentUserVideoRef = useRef(null);
   const remoteVideoRef = useRef(null);
   const peerInstance = useRef(null);
   const { id } = useParams();
 
-
   const App = () => {
     const [showJamboard, setShowJamboard] = useState(false);
-  
+
     const handleShowJamboard = () => {
       setShowJamboard(true);
     };
-  
+
     return (
       <div>
         <button onClick={handleShowJamboard}>Jamboard</button>
@@ -34,7 +32,7 @@ export default function VideoCall() {
       </div>
     );
   };
-  
+
   useEffect(() => {
     setCallId(id);
     var peer = new Peer();
@@ -52,7 +50,7 @@ export default function VideoCall() {
         navigator.mozGetUserMedia;
 
       getUserMedia(
-        { video: true, audio: true },
+        { video: { mediaSource: "screen" }, audio: true },
         function (stream) {
           call.answer(stream);
         },
@@ -105,13 +103,25 @@ export default function VideoCall() {
         alignItems: "center",
       }}
     >
+      <Box
+        style={{
+          display: jamboardOpen ? "block" : "none",
+          position: "absolute",
+          width: "60vw",
+          height: "60vh",
+          zIndex: 9,
 
-      <Jamboard/>
+          borderRadius: "1vh",
+          backgroundColor: "white",
+        }}
+      >
+        <Jamboard setJamboardOpen={setJamboardOpen} />
+      </Box>
       <video
         style={{
           marginTop: "25vh",
           marginBottom: "auto",
-          marginRight:"8vw",
+          marginRight: "8vw",
           width: "30vw",
 
           borderRadius: "10px",
@@ -119,7 +129,27 @@ export default function VideoCall() {
         }}
         ref={remoteVideoRef}
       />
-
+      <Box
+        style={{
+          width: "100%",
+          height: "5vh",
+          backgroundColor: "rgba(10,10,10,0.9)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Button
+          variant="contained"
+          style={{ backgroundColor: "black" }}
+          onClick={() => setJamboardOpen(!jamboardOpen)}
+        >
+          <GestureSharpIcon style={{ fontsize: "3vh", color: "yellow" }} />
+          <Typography style={{ fontsize: "1vh", color: "yellow" }}>
+            Jamboard
+          </Typography>
+        </Button>
+      </Box>
       <Box
         style={{
           width: "100vw",
@@ -130,21 +160,39 @@ export default function VideoCall() {
           backgroundColor: "rgba(0,0,0,0.5)",
         }}
       >
-
-        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">
-        <img
-          src={`${process.env.PUBLIC_URL}/youtube.png`}
-          alt="YouTube"
+        <Box
           style={{
-            width: "3rem",
-            height: "3rem",
-            margin: "0 2rem",
+            height: "100%",
+            width: "10%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "rgba(10,10,10,0.7)",
           }}
-        />
-      </a>
-
+        >
+          <a
+            href="https://www.youtube.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src={`${process.env.PUBLIC_URL}/youtube.png`}
+              alt="YouTube"
+              style={{
+                width: "50%",
+                margin: "0 2rem",
+              }}
+            />
+          </a>
+        </Box>
+        <button onClick={initiateCall(callId)}>Connect</button>
         <video
-          style={{ width: "15vh", height: "15vh", borderRadius: "10px" }}
+          style={{
+            marginLeft: "2vw",
+            width: "15vh",
+            height: "15vh",
+            borderRadius: "1vh",
+          }}
           ref={currentUserVideoRef}
         ></video>
       </Box>

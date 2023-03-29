@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import moment from "moment";
 export default function ClassInfoBoard({ infoData }) {
   return (
     <Box
@@ -22,7 +23,17 @@ export default function ClassInfoBoard({ infoData }) {
           fontFamily: `'Fredericka the Great', cursive`,
         }}
       >
-        {infoData.subject}
+        <i>{infoData.subject.name}</i>
+      </Typography>
+      <Typography
+        style={{
+          color: "white",
+          fontSize: "2.5vh",
+          marginTop: "2vh",
+          fontFamily: `'Fredericka the Great', cursive`,
+        }}
+      >
+        Topic : {infoData.title.slice(0, 20) + ".."}
       </Typography>
       <Typography
         style={{
@@ -31,7 +42,7 @@ export default function ClassInfoBoard({ infoData }) {
           fontFamily: `'Fredericka the Great', cursive`,
         }}
       >
-        Topic : {infoData.topic}
+        Date : {moment(infoData.start_time).format("L")}
       </Typography>
       <Typography
         style={{
@@ -40,7 +51,7 @@ export default function ClassInfoBoard({ infoData }) {
           fontFamily: `'Fredericka the Great', cursive`,
         }}
       >
-        Starts At : {infoData.starts}
+        Starts At : {moment(infoData.start_time).format("h : mm A")}
       </Typography>
     </Box>
   );
