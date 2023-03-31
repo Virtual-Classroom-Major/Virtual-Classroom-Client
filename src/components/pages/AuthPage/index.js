@@ -41,9 +41,20 @@ const AuthPage = () => {
       else {
         if (data.data.user_type === STUDENT)
           //if profile_updated true
-          navigate("/dashboard/profile_details_student");
+          // navigate("/dashboard/profile_details_student");
+          if (data.data.profile_updated) {
+            navigate("/dashboard/profile_student");
+          } else {
+              navigate("/dashboard/profile_details_student");
+                }
+
         else if (data.data.user_type === FACULTY)
+        if (data.data.profile_updated) {
+          navigate("/dashboard/profile_faculty");
+        } else {
           navigate("/dashboard/profile_details_faculty");
+         }
+    
       }
     } else {
       setAlert_State({
